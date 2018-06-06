@@ -1,0 +1,59 @@
+---
+- name: Install
+  hosts: all
+
+  vars:
+    pgadmin_password: "changeme"
+    pgadmin_username: "coetzeer@gmail.com"
+    pgadmin_db_username: pgadmin
+    pgadmin_db_password: pgadmin
+    pgadmin_install_dir: "/usr/local/pgadmin4/lib/python2.7/site-packages/pgadmin4"
+
+  tasks:
+    - name: "Install packages from pkg"
+      pkgng:
+        name: "{{item}}"
+        state: present
+      with_items:
+      - openjdk8
+      - bash
+      - rinetd
+
+    # - name: Enable the rinetd service
+    #   shell: "sysrc rinetd_enable=YES"
+
+    # - lineinfile:
+    #     path: /usr/local/etc/rinetd.conf
+    #     regexp: '.*5050$'
+    #     line: "{{ansible_default_ipv4.address}} 80 {{ansible_default_ipv4.address}} 5050"
+    #     create: True
+    #
+    # - lineinfile:
+    #     path: /usr/local/etc/rinetd.conf
+    #     line: "logfile /var/log/rinetd.log"
+
+    # - lineinfile:
+    #     path: /usr/local/etc/rinetd.conf
+    #     line: "logcommon"
+    #
+    # - name: Start the rinetd daemon
+    #   service:
+    #     name: rinetd
+    #     state: started
+    #     enabled: yes
+
+    # - template:
+    #     src: service.j2
+    #     dest: /usr/local/etc/rc.d/pgadmin
+    #     owner: root
+    #     group: wheel
+    #     mode: "u=rwx,g=r,o=r"
+    #
+    # - name: Enable the pgadmin service
+    #   shell: "sysrc pgadmin_enable=YES"
+    #
+    # - name: Start the pgadmin daemon
+    #   service:
+    #     name: pgadmin
+    #     state: started
+    #     enabled: yes
