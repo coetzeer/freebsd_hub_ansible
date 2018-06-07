@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# PROVIDE: pgadmin
+# PROVIDE: hub
 # REQUIRE: LOGIN
 # KEYWORD: shutdown
 
@@ -16,13 +16,13 @@ load_rc_config "${name}"
 
 pidfile=/var/run/${name}/${name}.pid
 logfile=/var/log/${name}.log
-start_precmd=hub_prestart
-start_cmd=hub_start
+start_precmd=do_prestart
+start_cmd=do_start
 command=/usr/sbin/daemon
-command_args="-P ${pidfile} -t pgadmin -o ${logfile} -u root /usr/local/hub-2018.2.9635/bin/hub.sh run"
+command_args="-P ${pidfile} -t ${name} -o ${logfile} -u root /usr/local/hub-2018.2.9635/bin/hub.sh run"
 
 
-pgadmin_prestart()
+do_prestart()
 {
         if [ ! -f "${logfile}" ]; then
                 #install -o "${jenkins_user}" -g "${jenkins_group}" -m 640 /dev/null "${jenkins_log_file}"
@@ -33,7 +33,7 @@ pgadmin_prestart()
         fi
 }
 
-pgadmin_start()
+do_start()
 {
         check_startmsgs && echo "Starting ${name}."
         exec ${command} ${command_args}
