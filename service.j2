@@ -19,7 +19,7 @@ logfile=/var/log/${name}.log
 start_precmd=hub_prestart
 start_cmd=hub_start
 command=/usr/sbin/daemon
-command_args="-P ${pidfile} -t pgadmin -o ${logfile} -u root /usr/local/hub-2018.2.9635/hub.sh run"
+command_args="-P ${pidfile} -t pgadmin -o ${logfile} -u root /usr/local/hub-2018.2.9635/bin/hub.sh run"
 
 
 pgadmin_prestart()
