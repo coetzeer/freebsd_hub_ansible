@@ -19,13 +19,13 @@
       - bash
       - rinetd
 
-    - name: Download youtrack
+    - name: Download hub
       get_url:
         url: https://download-cf.jetbrains.com/hub/hub-2018.2.9635.zip
         dest: /usr/local/hub-2018.2.9635.zip
         checksum: sha256:81f065af79802992ab74df5c3af0cba81f678671504b61c1e1fd4aa53341142b
 
-    - name: Unarchive youtrack
+    - name: Unarchive hub
       shell: "unzip hub-2018.2.9635.zip"
       args:
         chdir: /usr/local
@@ -63,7 +63,7 @@
 
     - name: Enable the hub service
       shell: "sysrc hub_enable=YES"
-    
+
     - name: Start the hub daemon
       service:
         name: hub
